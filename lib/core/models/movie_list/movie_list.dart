@@ -7,7 +7,7 @@ class MovieList {
   bool adult;
 
   @JsonKey(name: 'backdrop_path')
-  String backdropPath;
+  String? backdropPath;
 
   @JsonKey(name: 'genre_ids')
   List<int> genreIds;

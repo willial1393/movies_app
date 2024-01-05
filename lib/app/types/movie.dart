@@ -1,20 +1,20 @@
-enum MovieList {
-  noPlaying,
+enum MovieType {
+  nowPlaying,
   popular,
   topRated,
   upcoming
 }
 
-extension MovieListExtension on MovieList {
+extension MovieTypeExtension on MovieType {
   String get name {
     switch (this) {
-      case MovieList.noPlaying:
-        return 'no_playing';
-      case MovieList.popular:
+      case MovieType.nowPlaying:
+        return 'now_playing';
+      case MovieType.popular:
         return 'popular';
-      case MovieList.topRated:
+      case MovieType.topRated:
         return 'top_rated';
-      case MovieList.upcoming:
+      case MovieType.upcoming:
         return 'upcoming';
     }
   }

@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
 import 'package:movies_app/environment.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @Injectable()
 class TmdbApi {
@@ -16,6 +17,16 @@ class TmdbApi {
         receiveTimeout: const Duration(seconds: 30),
       ),
     );
+
+    _dio.interceptors.add(PrettyDioLogger(
+      requestHeader: false,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: false,
+      error: true,
+      compact: true,
+      maxWidth: 90,
+    ));
   }
 
   Future get(String path, {Map<String, dynamic>? queryParameters}) async {

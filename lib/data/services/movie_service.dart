@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:movies_app/app/types/languaje.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/core/interfaces/movie_interface.dart';
 import 'package:movies_app/core/models/movie_detail/movie_detail.dart';
@@ -14,26 +15,26 @@ class MovieService implements MovieInterface {
   @override
   Future<MovieDetail> detail({
     required int id,
-    required String language,
+    required Language language,
   }) async {
     final res = await api.get(
       '/movie/$id',
-      queryParameters: {'language': language},
+      queryParameters: {'language': language.isoCode},
     );
     return MovieDetail.fromJson(res);
   }
 
   @override
   Future<MovieListPaginate> get({
-    required MovieList movieList,
+    required MovieType movieType,
     required int page,
-    required String language,
+    required Language language,
   }) async {
     final res = await api.get(
-      '/movie/${movieList.name}',
+      '/movie/${movieType.name}',
       queryParameters: {
         'page': page,
-        'language': language,
+        'language': language.isoCode,
       },
     );
     return MovieListPaginate.fromJson(res);
@@ -44,7 +45,7 @@ class MovieService implements MovieInterface {
     required String query,
     required int page,
     required bool includeAdult,
-    required String language,
+    required Language language,
   }) async {
     final res = await api.get(
       '/search/movie',
@@ -52,7 +53,7 @@ class MovieService implements MovieInterface {
         'query': query,
         'page': page,
         'include_adult': includeAdult,
-        'language': language,
+        'language': language.isoCode,
       },
     );
     return MovieListPaginate.fromJson(res);

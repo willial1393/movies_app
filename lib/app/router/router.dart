@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:movies_app/app/screens/movie_list_screen.dart';
+import 'package:movies_app/app/screens/movie_list_screen/movie_list_screen.dart';
 
 part 'router.gr.dart';
 
