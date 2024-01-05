@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/app/providers/app_state.dart';
-import 'package:movies_app/app/types/languaje.dart';
+import 'package:movies_app/app/types/language.dart';
 
 class AppNotifier extends StateNotifier<AppState> {
   AppNotifier() : super(AppState());

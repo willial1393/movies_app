@@ -1,8 +1,9 @@
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/app/types/languaje.dart';
+import 'package:movies_app/app/types/language.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/core/interfaces/movie_interface.dart';
 import 'package:movies_app/core/models/movie_detail/movie_detail.dart';
+import 'package:movies_app/core/models/movie_genre_response/movie_genre_response.dart';
 import 'package:movies_app/core/models/movie_list_paginate/movie_list_paginate.dart';
 import 'package:movies_app/data/source/tmdb_api.dart';
 
@@ -57,5 +58,14 @@ class MovieService implements MovieInterface {
       },
     );
     return MovieListPaginate.fromJson(res);
+  }
+
+  @override
+  Future<MovieGenreResponse> genre({required Language language}) async {
+    final res = await api.get(
+      '/genre/movie/list',
+      queryParameters: {'language': language.isoCode},
+    );
+    return MovieGenreResponse.fromJson(res);
   }
 }

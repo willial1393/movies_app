@@ -57,7 +57,8 @@ class MovieList {
     required this.voteCount,
   });
 
-  factory MovieList.fromJson(Map<String, dynamic> json) => _$MovieListFromJson(json);
+  factory MovieList.fromJson(Map<String, dynamic> json) =>
+      _$MovieListFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieListToJson(this);
 }

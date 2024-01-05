@@ -1,5 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:movies_app/app/types/languaje.dart';
+import 'package:movies_app/app/types/language.dart';
 
 part 'app_state.g.dart';
 

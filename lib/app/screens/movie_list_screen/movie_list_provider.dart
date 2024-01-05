@@ -1,23 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_app/app/providers/app_provider.dart';
 import 'package:movies_app/app/screens/movie_list_screen/movie_list_state.dart';
-import 'package:movies_app/app/types/languaje.dart';
+import 'package:movies_app/app/types/language.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/core/interfaces/movie_interface.dart';
 import 'package:movies_app/injection.dart';
 
 class MovieListNotifier extends StateNotifier<MovieListState> {
   final MovieInterface movieService;
-  final Language language;
-  final bool includeAdult;
 
-  MovieListNotifier({
-    required this.movieService,
-    required this.language,
-    required this.includeAdult,
-  }) : super(MovieListState());
+  MovieListNotifier({required this.movieService}) : super(MovieListState());
 
   Future<void> getMovies({
+    required Language language,
     bool refresh = false,
   }) async {
     if (refresh) {
@@ -52,25 +46,25 @@ class MovieListNotifier extends StateNotifier<MovieListState> {
       switch (state.selectedMovieType) {
         case MovieType.nowPlaying:
           state = state.copyWith(
-            nowPlaying: movies.results,
+            nowPlaying: [...state.nowPlaying, ...movies.results],
             nowPlayingPage: page + 1,
           );
           break;
         case MovieType.popular:
           state = state.copyWith(
-            popular: movies.results,
+            popular: [...state.popular, ...movies.results],
             popularPage: page + 1,
           );
           break;
         case MovieType.topRated:
           state = state.copyWith(
-            topRated: movies.results,
+            topRated: [...state.topRated, ...movies.results],
             topRatedPage: page + 1,
           );
           break;
         case MovieType.upcoming:
           state = state.copyWith(
-            upcoming: movies.results,
+            upcoming: [...state.upcoming, ...movies.results],
             upcomingPage: page + 1,
           );
           break;
@@ -105,7 +99,5 @@ final movieListProvider =
     StateNotifierProvider<MovieListNotifier, MovieListState>((ref) {
   return MovieListNotifier(
     movieService: getIt<MovieInterface>(),
-    language: ref.watch(appProvider.select((value) => value.language)),
-    includeAdult: ref.watch(appProvider.select((value) => value.includeAdult)),
   );
 });

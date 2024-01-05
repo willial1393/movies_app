@@ -1,6 +1,7 @@
-import 'package:movies_app/app/types/languaje.dart';
+import 'package:movies_app/app/types/language.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/core/models/movie_detail/movie_detail.dart';
+import 'package:movies_app/core/models/movie_genre_response/movie_genre_response.dart';
 import 'package:movies_app/core/models/movie_list_paginate/movie_list_paginate.dart';
 
 abstract class MovieInterface {
@@ -19,6 +20,10 @@ abstract class MovieInterface {
 
   Future<MovieDetail> detail({
     required int id,
+    required Language language,
+  });
+
+  Future<MovieGenreResponse> genre({
     required Language language,
   });
 
