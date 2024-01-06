@@ -14,6 +14,7 @@ import 'package:movies_app/app/widgets/e_loading.dart';
 import 'package:movies_app/app/widgets/e_movie_card.dart';
 import 'package:movies_app/app/widgets/e_retry.dart';
 import 'package:movies_app/app/widgets/e_scaffold.dart';
+import 'package:movies_app/app/widgets/exit_app.dart';
 
 @RoutePage()
 class MovieListScreen extends ConsumerStatefulWidget {
@@ -51,48 +52,50 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
         await appRouter.push(const MovieSearchRoute());
       },
       title: 'Películas',
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(15.w),
-            child: DropdownButton<MovieType>(
-              isExpanded: true,
-              value: movieList.selectedMovieType,
-              onChanged: (MovieType? value) async {
-                if (value != null) {
-                  ref.read(movieListProvider.notifier).setMovieType(value);
-                }
-              },
-              items: MovieType.values.map((MovieType value) {
-                return DropdownMenuItem<MovieType>(
-                  value: value,
-                  child: Text(value.humanize),
-                );
-              }).toList(),
+      body: ExitApp(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(15.w),
+              child: DropdownButton<MovieType>(
+                isExpanded: true,
+                value: movieList.selectedMovieType,
+                onChanged: (MovieType? value) async {
+                  if (value != null) {
+                    ref.read(movieListProvider.notifier).setMovieType(value);
+                  }
+                },
+                items: MovieType.values.map((MovieType value) {
+                  return DropdownMenuItem<MovieType>(
+                    value: value,
+                    child: Text(value.humanize),
+                  );
+                }).toList(),
+              ),
             ),
-          ),
-          if (movieList.error)
-            Expanded(
-              child: ERetry(
-                onRetry: () => unawaited(
-                  fetchData(true),
+            if (movieList.error)
+              Expanded(
+                child: ERetry(
+                  onRetry: () => unawaited(
+                    fetchData(true),
+                  ),
                 ),
               ),
-            ),
-          if (movieList.selectedMovies.isEmpty && !movieList.error)
-            const Expanded(child: ELoading()),
-          if (movieList.selectedMovies.isNotEmpty && !movieList.error)
-            Expanded(
-              child: EListView(
-                onLoadMore: () async => fetchData(false),
-                onRefresh: () async => fetchData(true),
-                itemCount: movieList.selectedMovies.length,
-                itemBuilder: (context, index) {
-                  return EMovieCard(movie: movieList.selectedMovies[index]);
-                },
+            if (movieList.selectedMovies.isEmpty && !movieList.error)
+              const Expanded(child: ELoading()),
+            if (movieList.selectedMovies.isNotEmpty && !movieList.error)
+              Expanded(
+                child: EListView(
+                  onLoadMore: () async => fetchData(false),
+                  onRefresh: () async => fetchData(true),
+                  itemCount: movieList.selectedMovies.length,
+                  itemBuilder: (context, index) {
+                    return EMovieCard(movie: movieList.selectedMovies[index]);
+                  },
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

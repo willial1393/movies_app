@@ -32,6 +32,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   firebase_core: ^2.24.2
   flutter_native_splash: ^2.3.9
+  double_back_to_close_app: ^2.1.0
 
 dev_dependencies:
   flutter_test:

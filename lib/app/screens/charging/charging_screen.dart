@@ -68,7 +68,7 @@ class _ChargingScreenState extends ConsumerState<ChargingScreen> {
 
     await appRouter.pushAndPopUntil(
       const MovieListRoute(),
-      predicate: (route) => true,
+      predicate: (route) => false,
     );
   }
 }

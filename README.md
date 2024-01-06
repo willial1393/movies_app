@@ -4,7 +4,7 @@ Application for movies using themoviedb API
 
 ## Getting Started
 
-Install flutter 3.16.1
+Install flutter 3.16.5
 
 Create `config.json` file on root directory
 
