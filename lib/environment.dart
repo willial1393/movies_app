@@ -1,7 +1,6 @@
 class _Env {
   late String endpoint;
   late String token;
-  final String pathImage = 'https://image.tmdb.org/t/p/w500';
 
   _Env() {
     endpoint = _validateEnv(

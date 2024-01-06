@@ -18,7 +18,7 @@ extension LanguageExtension on Language {
       case Language.en:
         return 'en-US';
       case Language.es:
-        return 'es-ES';
+        return 'es-CO';
     }
   }
 }

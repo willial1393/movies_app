@@ -21,10 +21,26 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChargingScreen(),
       );
     },
+    MovieDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<MovieDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MovieDetailScreen(
+          id: args.id,
+          key: args.key,
+        ),
+      );
+    },
     MovieListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MovieListScreen(),
+      );
+    },
+    MovieSearchRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MovieSearchScreen(),
       );
     },
   };
@@ -45,6 +61,44 @@ class ChargingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MovieDetailScreen]
+class MovieDetailRoute extends PageRouteInfo<MovieDetailRouteArgs> {
+  MovieDetailRoute({
+    required int id,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MovieDetailRoute.name,
+          args: MovieDetailRouteArgs(
+            id: id,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieDetailRoute';
+
+  static const PageInfo<MovieDetailRouteArgs> page =
+      PageInfo<MovieDetailRouteArgs>(name);
+}
+
+class MovieDetailRouteArgs {
+  const MovieDetailRouteArgs({
+    required this.id,
+    this.key,
+  });
+
+  final int id;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MovieDetailRouteArgs{id: $id, key: $key}';
+  }
+}
+
+/// generated route for
 /// [MovieListScreen]
 class MovieListRoute extends PageRouteInfo<void> {
   const MovieListRoute({List<PageRouteInfo>? children})
@@ -54,6 +108,20 @@ class MovieListRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MovieListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MovieSearchScreen]
+class MovieSearchRoute extends PageRouteInfo<void> {
+  const MovieSearchRoute({List<PageRouteInfo>? children})
+      : super(
+          MovieSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieSearchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

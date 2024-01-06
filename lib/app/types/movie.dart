@@ -1,9 +1,4 @@
-enum MovieType {
-  nowPlaying,
-  popular,
-  topRated,
-  upcoming
-}
+enum MovieType { nowPlaying, popular, topRated, upcoming }
 
 extension MovieTypeExtension on MovieType {
   String get name {
@@ -17,5 +12,11 @@ extension MovieTypeExtension on MovieType {
       case MovieType.upcoming:
         return 'upcoming';
     }
+  }
+}
+
+extension MoviePathExtension on String {
+  String get toMoviePath {
+    return 'https://image.tmdb.org/t/p/w500/$this';
   }
 }
