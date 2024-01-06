@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/app/providers/app_provider.dart';
-import 'package:movies_app/app/screens/movie_list_screen/movie_list_provider.dart';
+import 'package:movies_app/app/screens/movie_list/movie_list_provider.dart';
 import 'package:movies_app/app/theme/colors.dart';
 import 'package:movies_app/app/types/date.dart';
 import 'package:movies_app/app/widgets/e_list_view.dart';

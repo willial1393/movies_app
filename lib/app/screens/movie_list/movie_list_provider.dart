@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movies_app/app/screens/movie_list_screen/movie_list_state.dart';
+import 'package:movies_app/app/screens/movie_list/movie_list_state.dart';
 import 'package:movies_app/app/types/language.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/core/interfaces/movie_interface.dart';
