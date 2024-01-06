@@ -38,9 +38,9 @@ class EScaffold extends ConsumerWidget {
                 DropdownButton<Language>(
                   isExpanded: true,
                   value: app.language,
-                  onChanged: (Language? value) {
+                  onChanged: (Language? value) async {
                     if (value != null) {
-                      ref.read(appProvider.notifier).setLanguage(value);
+                      await ref.read(appProvider.notifier).setLanguage(value);
                     }
                   },
                   items: Language.values.map((Language value) {
