@@ -5,10 +5,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies_app/app/providers/app_provider.dart';
+import 'package:movies_app/app/router/router.dart';
 import 'package:movies_app/app/screens/movie_list/movie_list_provider.dart';
-import 'package:movies_app/app/screens/movie_list/widgets/movie_card.dart';
 import 'package:movies_app/app/widgets/e_list_view.dart';
 import 'package:movies_app/app/widgets/e_loading.dart';
+import 'package:movies_app/app/widgets/e_movie_card.dart';
 import 'package:movies_app/app/widgets/e_retry.dart';
 import 'package:movies_app/app/widgets/e_scaffold.dart';
 
@@ -38,6 +39,9 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
     });
     final movieList = ref.watch(movieListProvider);
     return EScaffold(
+      onFloatAction: () async {
+        await appRouter.push(const MovieSearchRoute());
+      },
       title: 'Películas',
       body: Column(
         children: [
@@ -58,7 +62,7 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
                 onRefresh: () async => fetchData(true),
                 itemCount: movieList.selectedMovies.length,
                 itemBuilder: (context, index) {
-                  return MovieCard(movie: movieList.selectedMovies[index]);
+                  return EMovieCard(movie: movieList.selectedMovies[index]);
                 },
               ),
             ),

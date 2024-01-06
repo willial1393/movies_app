@@ -9,12 +9,13 @@ import 'package:movies_app/gen/assets.gen.dart';
 class EScaffold extends ConsumerWidget {
   final String title;
   final Widget body;
-
   final VoidCallback? onBack;
+  final VoidCallback? onFloatAction;
 
   const EScaffold({
     required this.title,
     required this.body,
+    this.onFloatAction,
     this.onBack,
     Key? key,
   }) : super(key: key);
@@ -94,6 +95,15 @@ class EScaffold extends ConsumerWidget {
               ),
             ),
       body: SafeArea(child: body),
+      floatingActionButton: onFloatAction == null
+          ? null
+          : FloatingActionButton(
+              onPressed: onFloatAction,
+              shape: const CircleBorder(
+                side: BorderSide(color: EColor.orange, width: 2),
+              ),
+              child: const Icon(Icons.search),
+            ),
     );
   }
 }

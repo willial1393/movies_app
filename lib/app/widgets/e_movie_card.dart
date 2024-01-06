@@ -7,10 +7,10 @@ import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/app/widgets/e_picture.dart';
 import 'package:movies_app/core/models/movie_list/movie_list.dart';
 
-class MovieCard extends StatelessWidget {
+class EMovieCard extends StatelessWidget {
   final MovieList movie;
 
-  const MovieCard({required this.movie, Key? key}) : super(key: key);
+  const EMovieCard({required this.movie, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
