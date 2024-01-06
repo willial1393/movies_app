@@ -25,6 +25,11 @@ class MovieSavedScreen extends StatelessWidget {
           future: getIt<StorageInterface>().getSavedMovies(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              if (snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text('No hay películas guardadas'),
+                );
+              }
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/app/providers/app_provider.dart';
@@ -27,6 +28,7 @@ class _ChargingScreenState extends ConsumerState<ChargingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      FlutterNativeSplash.remove();
       unawaited(fetchData());
     });
   }
