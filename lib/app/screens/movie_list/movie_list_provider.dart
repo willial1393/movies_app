@@ -93,6 +93,10 @@ class MovieListNotifier extends StateNotifier<MovieListState> {
         break;
     }
   }
+
+  void setMovieType(MovieType value) {
+    state = state.copyWith(selectedMovieType: value);
+  }
 }
 
 final movieListProvider =

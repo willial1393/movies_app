@@ -4,9 +4,11 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/app/providers/app_provider.dart';
 import 'package:movies_app/app/router/router.dart';
 import 'package:movies_app/app/screens/movie_list/movie_list_provider.dart';
+import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/app/widgets/e_list_view.dart';
 import 'package:movies_app/app/widgets/e_loading.dart';
 import 'package:movies_app/app/widgets/e_movie_card.dart';
@@ -37,6 +39,12 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
         unawaited(fetchData(true));
       });
     });
+    ref.listen(movieListProvider.select((value) => value.selectedMovieType),
+        (previous, next) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        unawaited(fetchData(true));
+      });
+    });
     final movieList = ref.watch(movieListProvider);
     return EScaffold(
       onFloatAction: () async {
@@ -45,6 +53,24 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
       title: 'Películas',
       body: Column(
         children: [
+          Padding(
+            padding: EdgeInsets.all(15.w),
+            child: DropdownButton<MovieType>(
+              isExpanded: true,
+              value: movieList.selectedMovieType,
+              onChanged: (MovieType? value) async {
+                if (value != null) {
+                  ref.read(movieListProvider.notifier).setMovieType(value);
+                }
+              },
+              items: MovieType.values.map((MovieType value) {
+                return DropdownMenuItem<MovieType>(
+                  value: value,
+                  child: Text(value.humanize),
+                );
+              }).toList(),
+            ),
+          ),
           if (movieList.error)
             Expanded(
               child: ERetry(

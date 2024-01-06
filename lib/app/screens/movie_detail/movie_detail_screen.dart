@@ -63,6 +63,8 @@ class MovieDetailScreen extends ConsumerWidget {
             );
           }
           if (snapshot.hasError) {
+            debugPrint(snapshot.error.toString());
+            debugPrintStack(stackTrace: snapshot.stackTrace);
             return Center(
               child: InkWell(
                 onTap: () {

@@ -13,6 +13,19 @@ extension MovieTypeExtension on MovieType {
         return 'upcoming';
     }
   }
+
+  String get humanize {
+    switch (this) {
+      case MovieType.nowPlaying:
+        return 'En cartelera';
+      case MovieType.popular:
+        return 'Populares';
+      case MovieType.topRated:
+        return 'Mejor valoradas';
+      case MovieType.upcoming:
+        return 'Proximamente';
+    }
+  }
 }
 
 extension MoviePathExtension on String {

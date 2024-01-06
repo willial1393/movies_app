@@ -88,7 +88,7 @@ MovieDetailProductionCompany _$MovieDetailProductionCompanyFromJson(
         Map<String, dynamic> json) =>
     MovieDetailProductionCompany(
       id: json['id'] as int,
-      logoPath: json['logo_path'] as String,
+      logoPath: json['logo_path'] as String?,
       name: json['name'] as String,
       originCountry: json['origin_country'] as String,
     );

@@ -117,7 +117,7 @@ class MovieDetailProductionCompany {
   int id;
 
   @JsonKey(name: 'logo_path')
-  String logoPath;
+  String? logoPath;
 
   String name;
 
