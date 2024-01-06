@@ -65,8 +65,8 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
                   final movie = movieList.selectedMovies[index];
                   final path = '${env.pathImage}/${movie.posterPath}';
                   return Container(
-                    height: 0.5.sw,
-                    margin: EdgeInsets.all(8.w),
+                    height: 0.4.sw,
+                    margin: EdgeInsets.all(5.w),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
                       color: EColor.white,
@@ -87,8 +87,8 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
                           ),
                           child: EPicture(
                             path: path,
-                            height: 0.5.sw,
-                            width: 0.35.sw,
+                            height: 0.4.sw,
+                            width: 0.26.sw,
                           ),
                         ),
                         SizedBox(width: 8.w),
@@ -108,7 +108,7 @@ class _MovieListScreenState extends ConsumerState<MovieListScreen> {
                               ),
                               Text(
                                 movie.overview,
-                                maxLines: 3,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(

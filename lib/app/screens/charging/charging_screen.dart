@@ -57,8 +57,13 @@ class _ChargingScreenState extends ConsumerState<ChargingScreen> {
 
   Future<void> fetchData() async {
     await ref.read(appProvider.notifier).fetchGenres();
+
     final language = await storage.getLanguage();
     await ref.read(appProvider.notifier).setLanguage(language);
+
+    final includeAdult = await storage.getIncludeAdult();
+    await ref.read(appProvider.notifier).setIncludeAdult(includeAdult);
+
     await appRouter.pushAndPopUntil(
       const MovieListRoute(),
       predicate: (route) => true,

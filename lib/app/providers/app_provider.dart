@@ -19,7 +19,8 @@ class AppNotifier extends StateNotifier<AppState> {
     state = state.copyWith(language: language);
   }
 
-  void setIncludeAdult(bool includeAdult) {
+  Future<void> setIncludeAdult(bool includeAdult) async {
+    await storage.setIncludeAdult(includeAdult);
     state = state.copyWith(includeAdult: includeAdult);
   }
 

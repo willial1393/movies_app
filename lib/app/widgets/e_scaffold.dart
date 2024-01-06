@@ -30,9 +30,10 @@ class EScaffold extends ConsumerWidget {
         elevation: 0,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(10.w),
+            padding: EdgeInsets.all(30.w),
             child: Column(
               children: [
+                SizedBox(height: 30.h),
                 Assets.logo.image(width: 0.2.sw),
                 SizedBox(height: 30.h),
                 DropdownButton<Language>(
@@ -62,6 +63,21 @@ class EScaffold extends ConsumerWidget {
                       ),
                     );
                   }).toList(),
+                ),
+                SizedBox(height: 10.h),
+                Row(
+                  children: [
+                    const Text('Películas adultos'),
+                    const Spacer(),
+                    Switch(
+                      activeColor: EColor.orange,
+                      inactiveThumbColor: EColor.silver,
+                      value: app.includeAdult,
+                      onChanged: (value) {
+                        ref.read(appProvider.notifier).setIncludeAdult(value);
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

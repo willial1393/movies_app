@@ -24,4 +24,18 @@ class StorageService implements StorageInterface {
   Future<void> setLanguage(Language language) async {
     await _storage.write(key: 'language', value: language.name);
   }
+
+  @override
+  Future<bool> getIncludeAdult() async {
+    final res = await _storage.read(key: 'includeAdult');
+    if (res == null) {
+      return false;
+    }
+    return res == 'true';
+  }
+
+  @override
+  Future<void> setIncludeAdult(bool includeAdult) async {
+    await _storage.write(key: 'includeAdult', value: includeAdult.toString());
+  }
 }
