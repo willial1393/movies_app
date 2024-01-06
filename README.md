@@ -1,8 +1,12 @@
 # movies_app
 
-Test evertec
+Application for movies using themoviedb API
 
 ## Getting Started
+
+Install flutter 3.16.1
+
+Create `config.json` file on root directory
 
 ```bash
 flutter pub get
@@ -11,7 +15,7 @@ flutter pub get
 ## Run
 
 ```bash
-flutter pub run --dart-define-from-file="config.json"
+flutter run --dart-define-from-file="config.json"
 ```
 
 ## Generate Routes

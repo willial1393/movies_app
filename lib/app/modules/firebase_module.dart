@@ -8,7 +8,7 @@ abstract class FirebaseModule {
   Future<FirebaseApp> init() async {
     final app = await Firebase.initializeApp();
     FirebaseFirestore.instance.settings = const Settings(
-      persistenceEnabled: false,
+      persistenceEnabled: true,
       cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
     );
     await FirebaseFirestore.instance.disableNetwork();
