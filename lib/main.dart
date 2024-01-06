@@ -9,13 +9,13 @@ import 'package:movies_app/injection.dart';
 Future<void> main() async {
   await runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await configureDependencies();
     await SystemChrome.setPreferredOrientations(
       [
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ],
     );
+    await configureDependencies();
     runApp(
       const ProviderScope(
         child: App(),

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_detail.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class MovieDetail {
   bool adult;
 
@@ -96,7 +96,7 @@ class MovieDetail {
   Map<String, dynamic> toJson() => _$MovieDetailToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class MovieDetailGenre {
   int id;
   String name;
@@ -112,7 +112,7 @@ class MovieDetailGenre {
   Map<String, dynamic> toJson() => _$MovieDetailGenreToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class MovieDetailProductionCompany {
   int id;
 
@@ -137,7 +137,7 @@ class MovieDetailProductionCompany {
   Map<String, dynamic> toJson() => _$MovieDetailProductionCompanyToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class MovieDetailProductionCountry {
   @JsonKey(name: 'iso_3166_1')
   String iso31661;
@@ -155,7 +155,7 @@ class MovieDetailProductionCountry {
   Map<String, dynamic> toJson() => _$MovieDetailProductionCountryToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class MovieDetailSpokenLanguage {
   @JsonKey(name: 'english_name')
   String englishName;

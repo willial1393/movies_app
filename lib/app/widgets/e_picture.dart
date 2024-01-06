@@ -49,7 +49,7 @@ class _EPictureState extends State<EPicture> {
       image = null;
       error = false;
     }
-    if (image == null && !error) {
+    if (image == null && !error && widget.path != null) {
       loading = true;
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await DefaultCacheManager().getSingleFile(widget.path!).then((value) {
@@ -75,14 +75,13 @@ class _EPictureState extends State<EPicture> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              if (error)
-                _error()
-              else if ((loading || image == null) && widget.path != null)
+              if (error || image == null) _error(),
+              if ((loading || image == null) && widget.path != null && !error)
                 _Shimmer(
                   width: widget.width,
                   height: widget.height,
-                )
-              else
+                ),
+              if (image != null)
                 Image(
                   width: widget.width,
                   height: widget.height,
@@ -113,7 +112,8 @@ class _EPictureState extends State<EPicture> {
 
   Widget _error() {
     final size = Size(widget.width, widget.height);
-    return SizedBox(
+    return Container(
+      color: EColor.grey,
       width: size.width,
       height: size.height,
       child: Padding(

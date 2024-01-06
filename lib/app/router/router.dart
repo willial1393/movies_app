@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:movies_app/app/screens/charging/charging_screen.dart';
 import 'package:movies_app/app/screens/movie_detail/movie_detail_screen.dart';
 import 'package:movies_app/app/screens/movie_list/movie_list_screen.dart';
+import 'package:movies_app/app/screens/movie_saved/movie_saved_screen.dart';
 import 'package:movies_app/app/screens/movie_search/movie_search_screen.dart';
 
 part 'router.gr.dart';
@@ -15,6 +16,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: MovieListRoute.page),
         AutoRoute(page: MovieDetailRoute.page),
         AutoRoute(page: MovieSearchRoute.page),
+        AutoRoute(page: MovieSavedRoute.page),
       ];
 }
 

@@ -4,11 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/app/providers/app_provider.dart';
 import 'package:movies_app/app/router/router.dart';
+import 'package:movies_app/app/screens/movie_detail/movie_detail_provider.dart';
 import 'package:movies_app/app/screens/movie_detail/widgets/movie_detail_header.dart';
 import 'package:movies_app/app/types/date.dart';
 import 'package:movies_app/app/widgets/e_loading.dart';
+import 'package:movies_app/app/widgets/e_notification.dart';
 import 'package:movies_app/app/widgets/e_scaffold.dart';
 import 'package:movies_app/core/interfaces/movie_interface.dart';
+import 'package:movies_app/core/interfaces/storage_interface.dart';
 import 'package:movies_app/core/models/movie_detail/movie_detail.dart';
 import 'package:movies_app/injection.dart';
 
@@ -25,12 +28,25 @@ class MovieDetailScreen extends ConsumerWidget {
       onBack: () {
         appRouter.back();
       },
+      floatActionIcon: Icons.save,
+      onFloatAction: () async {
+        final movie = ref.read(movieDetailProvider);
+        if (movie != null) {
+          getIt<StorageInterface>().saveMovie(movie);
+          ENotification.success('Película guardada');
+        }
+      },
       title: 'Detalle',
       body: FutureBuilder<MovieDetail>(
         future: getIt<MovieInterface>().detail(id: id, language: language),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final movie = snapshot.data!;
+            final countries =
+                movie.productionCountries.map((e) => e.name).join(', ');
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ref.read(movieDetailProvider.notifier).state = movie;
+            });
             return Column(
               children: [
                 MovieDetailHeader(movie: movie),
@@ -46,8 +62,7 @@ class MovieDetailScreen extends ConsumerWidget {
                 SizedBox(height: 10.h),
                 Text('Duración: ${movie.runtime} min'),
                 Text('Idioma: ${movie.originalLanguage}'),
-                Text(
-                    'País: ${movie.productionCountries.map((e) => e.name).join(', ')}'),
+                Text('País: $countries'),
                 SizedBox(height: 10.h),
                 const Text('Descripción:',
                     style: TextStyle(fontWeight: FontWeight.bold)),

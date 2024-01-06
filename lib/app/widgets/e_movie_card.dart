@@ -9,8 +9,13 @@ import 'package:movies_app/core/models/movie_list/movie_list.dart';
 
 class EMovieCard extends StatelessWidget {
   final MovieList movie;
+  final VoidCallback? onDelete;
 
-  const EMovieCard({required this.movie, Key? key}) : super(key: key);
+  const EMovieCard({
+    required this.movie,
+    this.onDelete,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +56,23 @@ class EMovieCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    movie.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          movie.title,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      if (onDelete != null)
+                        IconButton(
+                          onPressed: onDelete,
+                          icon: const Icon(
+                            Icons.delete,
+                            color: EColor.red,
+                          ),
+                        ),
+                    ],
                   ),
                   Text(
                     movie.releaseDate.toDateFormat(),
@@ -71,6 +90,7 @@ class EMovieCard extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(width: 8.w),
           ],
         ),
       ),

@@ -37,6 +37,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MovieListScreen(),
       );
     },
+    MovieSavedRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MovieSavedScreen(),
+      );
+    },
     MovieSearchRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -108,6 +114,20 @@ class MovieListRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MovieListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MovieSavedScreen]
+class MovieSavedRoute extends PageRouteInfo<void> {
+  const MovieSavedRoute({List<PageRouteInfo>? children})
+      : super(
+          MovieSavedRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieSavedRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -49,7 +49,7 @@ Map<String, dynamic> _$MovieDetailToJson(MovieDetail instance) =>
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'budget': instance.budget,
-      'genres': instance.genres,
+      'genres': instance.genres.map((e) => e.toJson()).toList(),
       'homepage': instance.homepage,
       'id': instance.id,
       'imdb_id': instance.imdbId,
@@ -58,12 +58,15 @@ Map<String, dynamic> _$MovieDetailToJson(MovieDetail instance) =>
       'overview': instance.overview,
       'popularity': instance.popularity,
       'poster_path': instance.posterPath,
-      'production_companies': instance.productionCompanies,
-      'production_countries': instance.productionCountries,
+      'production_companies':
+          instance.productionCompanies.map((e) => e.toJson()).toList(),
+      'production_countries':
+          instance.productionCountries.map((e) => e.toJson()).toList(),
       'release_date': instance.releaseDate,
       'revenue': instance.revenue,
       'runtime': instance.runtime,
-      'spoken_languages': instance.spokenLanguages,
+      'spoken_languages':
+          instance.spokenLanguages.map((e) => e.toJson()).toList(),
       'status': instance.status,
       'tagline': instance.tagline,
       'title': instance.title,
