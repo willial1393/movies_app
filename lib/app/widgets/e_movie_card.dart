@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/app/providers/app_provider.dart';
 import 'package:movies_app/app/router/router.dart';
 import 'package:movies_app/app/theme/colors.dart';
 import 'package:movies_app/app/types/date.dart';
 import 'package:movies_app/app/types/movie.dart';
 import 'package:movies_app/app/widgets/e_picture.dart';
+import 'package:movies_app/core/models/movie_genre/movie_genre.dart';
 import 'package:movies_app/core/models/movie_list/movie_list.dart';
 
-class EMovieCard extends StatelessWidget {
+class EMovieCard extends ConsumerWidget {
   final MovieList movie;
   final VoidCallback? onDelete;
 
@@ -18,7 +21,10 @@ class EMovieCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final genres = ref.watch(
+      appProvider.select((value) => value.genres),
+    );
     return InkWell(
       onTap: () async {
         await appRouter.push(MovieDetailRoute(id: movie.id));
@@ -84,7 +90,12 @@ class EMovieCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    movie.genreIds.join(', '),
+                    movie.genreIds
+                        .map((e) => genres
+                            .firstWhere((element) => element.id == e,
+                                orElse: () => MovieGenre(id: 0, name: ''))
+                            .name)
+                        .join(', '),
                     style: const TextStyle(color: EColor.grey),
                   ),
                 ],
